@@ -21,7 +21,8 @@ const html = Prism.highlight(text, Prism.languages.sysml, 'sysml');
 ```
 
 The grammars use the token names `keyword`, `comment`, `string`, `number` and
-`punctuation`, which all Prism themes style, and `unrestricted-name` for names
-in single quotes, which themes leave plain.
+`punctuation`, which all Prism themes style, `prefix-metadata` (with the alias
+`keyword`) for user-defined keywords such as `#Safety`, and `unrestricted-name`
+for names in single quotes, which themes leave plain.
 
 Tests: `npm install && npm test`.

@@ -21,12 +21,13 @@ function specKeywords(file) {
 }
 
 function grammarKeywords(language) {
-  const source = Prism.languages[language].keyword[1].source;
+  const source = Prism.languages[language].keyword.source;
   return source.replace(/^\\b\(\?:/, '').replace(/\)\\b$/, '').split('|');
 }
 
 // The class map of a token stream (see pygments/scripts/classmap.py).
 function classmap(tokens, type) {
+  // A token counts by its type or, failing that, by an alias.
   let out = '';
   for (const token of tokens) {
     if (typeof token === 'string') {
@@ -35,7 +36,9 @@ function classmap(tokens, type) {
       }
     } else {
       const content = Array.isArray(token.content) ? token.content : [token.content];
-      out += classmap(content, token.type);
+      const kind = CLASSES[token.type] ? token.type
+        : [].concat(token.alias || []).find((a) => CLASSES[a]);
+      out += classmap(content, kind);
     }
   }
   return out;

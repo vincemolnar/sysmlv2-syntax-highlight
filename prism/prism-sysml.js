@@ -65,13 +65,15 @@
         { pattern: /\/\*[\s\S]*?(?:\*\/|$)/, greedy: true },
         { pattern: /"(?:[^"\\\r\n]|\\.)*"?/, greedy: true }
       ],
+      // Prefix metadata, a user-defined keyword (#Safety part ...). Before
+      // unrestricted names, which it may contain.
+      'prefix-metadata': {
+        pattern: RegExp('#(?:\\$::)?' + NAME + '(?:::' + NAME + ')*'),
+        alias: 'keyword'
+      },
       // Unrestricted names are names: no keywords inside.
       'unrestricted-name': { pattern: /'(?:[^'\\\r\n]|\\.)*'/, greedy: true },
-      'keyword': [
-        // Prefix metadata, a user-defined keyword (#Safety part ...).
-        RegExp('#(?:\\$::)?' + NAME + '(?:::' + NAME + ')*'),
-        RegExp('\\b(?:' + keywords.join('|') + ')\\b')
-      ],
+      'keyword': RegExp('\\b(?:' + keywords.join('|') + ')\\b'),
       'number': /(?<![A-Za-z0-9_])[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?|(?<!\.)\.[0-9]+(?:[eE][+-]?[0-9]+)?/,
       'punctuation': /::>|:>>|===|!==|::|:>|:=|\.\.|\.\?|->|=>|==|!=|<=|>=|\*\*|\?\?|@@|[(){}\[\];,~@#%&^|*+\-\/$.:<=>?!]/
     };
