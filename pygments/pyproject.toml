@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygments-sysml"
+version = "1.0.0"
+description = "Pygments lexers for the SysML v2 and KerML textual notations"
+readme = "README.md"
+authors = [{name = "Vince Molnár"}]
+license = {text = "MIT"}
+requires-python = ">=3.6"
+dependencies = ["Pygments>=2.0"]
+keywords = ["pygments", "lexer", "syntax highlighting", "SysML", "KerML", "MBSE"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Filters",
+]
+
+[project.urls]
+Homepage = "https://github.com/vincemolnar/sysmlv2-syntax-highlight"
+Source = "https://github.com/vincemolnar/sysmlv2-syntax-highlight/tree/main/pygments"
+
+[project.entry-points."pygments.lexers"]
+sysml = "pygments_sysml.lexers:SysMLLexer"
+kerml = "pygments_sysml.lexers:KerMLLexer"
+
+[project.entry-points."pygments.styles"]
+sysml-pilot = "pygments_sysml.styles:SysMLPilotStyle"
+
+[tool.setuptools]
+packages = ["pygments_sysml"]
