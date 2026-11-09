@@ -2,14 +2,17 @@
 package 'Drone Example' {
     private import ScalarValues::*;
     private import ISQ::*;
-    public import SI::{kg, m, s};
+    private import SI::*;
+    private import NumericalFunctions::sum;
+    private import SequenceFunctions::size;
+    private import ControlFunctions::select;
 
     //* A multiline note.
         The parser ignores it, unlike the regular comments below. */
 
     doc /* Models of a small quadcopter, see https://www.omg.org/spec/SysML/. */
 
-    comment Units about Drone
+    comment Units about Drone locale "en_US"
         /* All values are in SI units. */
 
     metadata def Safety {
@@ -27,12 +30,14 @@ package 'Drone Example' {
         attribute 'max. speed' : SpeedValue = 2.0E1 [m/s];
         attribute serial : String = "DR-01 \"alpha\"";
         attribute manual : String = "https://example.org/drones"; // Don't "quote" notes.
-        attribute flightTime : TimeValue[0..1];
+        attribute flightTime : DurationValue[0..1];
 
         #Safety part battery : Battery {
             attribute capacity : Real = 5.4e3;
         }
+        #'Drone Example'::Safety part spare : Battery;
         part rotors : Rotor[4] ordered nonunique;
+        part 'pilot\'s seat';
         port controlPort : ~ControlPort;
         ref part pilot : Pilot[0..*];
 
@@ -43,6 +48,7 @@ package 'Drone Example' {
     part def Rotor;
     part def Pilot;
     port def ControlPort { in attribute command : String; }
+    item def Command;
 
     part drones : Drone[*];
     #SafetySpecific part drone : Drone {
@@ -80,15 +86,15 @@ package 'Drone Example' {
         return result : Real = sum(values) / size(values);
     }
 
-    attribute selected = drones->select { in d : Drone; d.mass < 1.5 [kg] };
-    attribute first = selected#(1);
-    attribute isDrone = drone @ Drone and drone istype Vehicle
+    ref part selected : Drone[*] = drones->select { in d : Drone; d.mass < 1.5 [kg] };
+    ref part firstDrone : Drone = selected#(1);
+    attribute isDrone : Boolean = drone @ Drone and drone istype Vehicle
         and not (drone hastype Rotor) xor false implies true;
-    attribute isPart = drone @@ SysML::PartUsage;
-    attribute name = drone.?{ in d; d.serial != null } ?? "none";
-    attribute total = (1 + 2 * 3 - 4 / 5 % 6) ** 2 ^ 1;
-    attribute same = drone === drone or drone !== drones;
-    attribute rootName = $::'Drone Example'::Drone;
+    attribute isPart : Boolean = drone @@ SysML::PartUsage;
+    attribute serials : String[*] = drones.?{ in d : Drone; d.serial != null }.serial ?? "none";
+    attribute total : Real = (1 + 2 * 3 - 4 / 5 % 6) ** 2 ^ 1;
+    attribute same : Boolean = drone === drone or drone !== firstDrone;
+    ref part root : Drone = $::'Drone Example'::drone;
 
-    rep inOCL language "ocl" /* self.mass <= 2 */
+    rep inOCL language "ocl" /* self.drones->size() <= 10 */
 }
