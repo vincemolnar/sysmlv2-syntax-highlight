@@ -1,0 +1,68 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pygments:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - python: "3.11"
+            pygments: "2.5.2"
+          - python: "3.11"
+            pygments: "2.11.2"
+          - python: "3.13"
+            pygments: "2.21.0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install "pygments==${{ matrix.pygments }}" pytest ./pygments
+      - run: pytest pygments/tests
+      - run: python notepad++/build.py --check
+      - run: python chroma/build.py --check
+
+  javascript:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [highlightjs, prism]
+    defaults:
+      run:
+        working-directory: ${{ matrix.package }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm test
+
+  rouge:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rouge
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - run: gem install rouge minitest
+      - run: ruby test_sysml.rb
+
+  chroma:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: chroma
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: chroma/go.mod
+      - run: go test ./...
