@@ -1,4 +1,5 @@
 // A small drone model that exercises the lexical structure of SysML v2.
+// It only illustrates the syntax and is not an example of good modeling practice.
 package 'Drone Example' {
     private import ScalarValues::*;
     private import ISQ::*;

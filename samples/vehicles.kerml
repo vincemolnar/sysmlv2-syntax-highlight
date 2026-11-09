@@ -1,4 +1,5 @@
 // A small model that exercises the lexical structure of KerML.
+// It only illustrates the syntax and is not an example of good modeling practice.
 library package Vehicles {
     private import ScalarValues::*;
     public import Base::Anything;

@@ -8,6 +8,12 @@ Systems Modeling Language (SysML) v2 and the Kernel Modeling Language (KerML).
 | `SysMLLexer` | `sysml`, `sysml2`, `sysmlv2` | `*.sysml` | `text/x-sysml` |
 | `KerMLLexer` | `kerml` | `*.kerml` | `text/x-kerml` |
 
+The lexers are a by-product of writing
+[The SysML v2 Book](https://leanpub.com/sysmlv2). They are part of
+[sysmlv2-syntax-highlight](https://github.com/vincemolnar/sysmlv2-syntax-highlight),
+which also has SysML v2 highlighting for highlight.js, Prism, Rouge, Chroma and
+Notepad++.
+
 ## Installation and use
 
 ```sh

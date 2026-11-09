@@ -1,8 +1,11 @@
 # Samples
 
 Sample models that use every lexical construct of SysML v2 and KerML, and their
-class maps. A class map (`<sample>.classes`) has the same lines as its sample;
-whitespace is kept and every other character is replaced by its class:
+class maps. The models only illustrate the syntax; they are not examples of good
+modeling practice.
+
+A class map (`<sample>.classes`) has the same lines as its sample; whitespace is
+kept and every other character is replaced by its class:
 
 | Letter | Class |
 |---|---|

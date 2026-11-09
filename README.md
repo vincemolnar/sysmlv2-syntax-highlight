@@ -16,6 +16,11 @@ highlighters:
 Some of these platforms only use the lexers that ship with the highlighter, so
 there a language has to be added upstream before it can be used.
 
+These highlighters are a by-product of writing
+[The SysML v2 Book](https://leanpub.com/sysmlv2), whose many textual models
+needed them. They are shared here in the hope that they are useful beyond the
+book.
+
 ## What is highlighted
 
 All formats classify the text the same way:
@@ -47,7 +52,8 @@ reserved words, so every format has separate SysML and KerML definitions.
 ## Consistency
 
 [`samples`](samples) contains sample models and, for each, a class map that
-gives the class of every character. The class maps are generated from the
+gives the class of every character. The models only illustrate the syntax; they
+are not examples of good modeling practice. The class maps are generated from the
 Pygments lexers. The tests of every other format highlight the samples with the
 real highlighter and compare the result with the class maps character by
 character. During development, all formats were also run on the 94 files of the
