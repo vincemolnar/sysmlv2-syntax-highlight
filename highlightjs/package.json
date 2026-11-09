@@ -1,0 +1,31 @@
+{
+  "name": "highlightjs-sysml",
+  "version": "1.0.0",
+  "description": "SysML v2 and KerML grammars for highlight.js",
+  "main": "sysml.js",
+  "files": [
+    "sysml.js"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "highlight.js",
+    "syntax highlighting",
+    "SysML",
+    "KerML"
+  ],
+  "author": "Vince Molnár",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincemolnar/sysmlv2-syntax-highlight.git",
+    "directory": "highlightjs"
+  },
+  "peerDependencies": {
+    "highlight.js": "^11.0.0"
+  },
+  "devDependencies": {
+    "highlight.js": "^11.12.0"
+  }
+}

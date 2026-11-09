@@ -1,0 +1,32 @@
+{
+  "name": "prism-sysml",
+  "version": "1.0.0",
+  "description": "SysML v2 and KerML grammars for Prism",
+  "main": "prism-sysml.js",
+  "files": [
+    "prism-sysml.js"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "prism",
+    "prismjs",
+    "syntax highlighting",
+    "SysML",
+    "KerML"
+  ],
+  "author": "Vince Molnár",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincemolnar/sysmlv2-syntax-highlight.git",
+    "directory": "prism"
+  },
+  "peerDependencies": {
+    "prismjs": "^1.0.0"
+  },
+  "devDependencies": {
+    "prismjs": "^1.30.0"
+  }
+}
