@@ -1,0 +1,39 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "pygments-v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Check that the tag matches the package version
+        run: |
+          version=$(python -c "import tomllib; print(tomllib.load(open('pygments/pyproject.toml', 'rb'))['project']['version'])")
+          test "${GITHUB_REF_NAME}" = "pygments-v${version}"
+      - run: pip install build pytest ./pygments
+      - run: pytest pygments/tests
+      - run: python -m build pygments --outdir dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
