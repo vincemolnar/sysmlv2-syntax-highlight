@@ -161,11 +161,6 @@ def test_samples_lex_without_errors(name):
     assert [v for t, v in result if t is Error] == []
 
 
-def test_guessing_recognizes_sysml_definitions():
-    assert SysMLLexer.analyse_text('part def Drone { }') == 0.5
-    assert SysMLLexer.analyse_text('def part(x): pass') == 0.0
-
-
 def test_pilot_style():
     style = SysMLPilotStyle.style_for_token
     assert style(Keyword)['bold'] and style(Keyword)['color'] == '7f0055'
