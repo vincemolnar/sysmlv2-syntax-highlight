@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygments-sysml"
-version = "1.0.0"
+version = "1.0.1"
 description = "Pygments lexers for the SysML v2 and KerML textual notations"
 readme = "README.md"
 authors = [{name = "Vince Molnár"}]

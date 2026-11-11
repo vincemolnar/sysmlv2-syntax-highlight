@@ -12,4 +12,4 @@ from pygments_sysml.lexers import KerMLLexer, SysMLLexer
 from pygments_sysml.styles import SysMLPilotStyle
 
 __all__ = ['SysMLLexer', 'KerMLLexer', 'SysMLPilotStyle']
-__version__ = '1.0.0'
+__version__ = '1.0.1'
